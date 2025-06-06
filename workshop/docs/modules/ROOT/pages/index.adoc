@@ -1,8 +1,11 @@
-= Antora Workshop
+= Quantization Workshop
 :!sectids:
 
 [id='introduction']
 [.text-center.strong]
 == Introduction
 
-Welcome. 
+In this workshop, we will explore quantization, a technique for reducing the precision of model weights to improve inference speed and reduce memory usage.
+
+We will review an in depth explanation of quantization and then explore the impact of quantization on model performance.
+

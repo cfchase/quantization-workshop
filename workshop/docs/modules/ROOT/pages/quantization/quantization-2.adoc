@@ -1,0 +1,6 @@
+= Quantization 2
+:!sectids:
+
+[id='quantization-2']
+[.text-center.strong]
+== Quantization 2

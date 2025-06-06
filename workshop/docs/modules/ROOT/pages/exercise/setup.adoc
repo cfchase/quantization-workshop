@@ -1,0 +1,105 @@
+[id='creating-a-workbench']
+= Workshop Environment
+
+You can run this workshop in your own GPU environment or in a {productname-short} project and workbench.  
+
+
+NOTE:  If you choose to run in your own environment with, you can skip the following steps and proceed to the next section.
+
+== Setting up your data science project
+
+To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects allow you and your team to organize and collaborate on resources within separated namespaces.
+
+
+.Procedure
+
+** *Navigating to the {productname-short} dashboard*:
++
+.. After you log in to the OpenShift console, click the application launcher icon on the header.
++
+image::setup/ocp-console-ds-tile.png[{productname-short} dashboard link]
+
+.. When prompted, log in to the {productname-short} dashboard by using your OpenShift credentials. {productname-short} uses the same credentials as OpenShift for the dashboard, notebooks, and all other components.
++
+image::setup/login-with-openshift.png[OpenShift login, 300]
+
+The {productname-short} dashboard shows the *Home* page.
+
+. On the navigation menu, select *Data science projects*. This page lists any existing projects that you have access to. From this page, you can select an existing project (if any) or create a new one.
++
+image::setup/create-project.png[Create project link]
+
+
+. Click *Create project*. 
+
+
+. Enter a display name and description.
++
+image::setup/ds-project-new-form.png[New data science project form, 600]
+
+. Click *Create*.
+
+
+== Creating a workbench
+
+A workbench is an instance of your development and experimentation environment. When you create a workbench, you select a workbench image (sometimes referred to as a notebook image) that is optimized with the tools and libraries that you need for developing models. 
+
+
+. Click the *Workbenches* tab, and then click the *Create workbench* button.
++
+image::setup/ds-project-create-workbench.png[Create workbench button, 600]
+
+. Fill out the name and description.
++
+image::setup/create-workbench-form-name-desc.png[Workbench name and description, 600]
++
+{org-name} provides several supported workbench images. In the *Notebook image* section, you can choose one of the default images or a custom image that an administrator has set up for you. The *Standard Data Science* image has the libraries needed for this {deliverable}.
+
+. Select the latest *Standard Data Science* image.
++
+image::setup/create-workbench-form-image.png[Workbench image, 600]
+
+. For Deployment size, choose the *Small* container size and *1* accelerator of the appropriate type.  
++
+This will be sufficient for the TinyLlama model, but you can increase the size if you want to test larger models.
++
+image::setup/create-workbench-form-size.png[Workbench size, 600]
+
+.  Edit the storage options and increase the storage size to 100GB.
++
+image::setup/create-workbench-form-storage-options.png[Workbench storage, 600]
++
+image::setup/create-workbench-form-edit-storage.png[Workbench storage, 600]
+
+
+. Click *Create workbench*.
+
+
+. Click the link for your workbench. If prompted, log in and allow the Notebook to authorize your user.
++
+image::setup/ds-project-workbench-open.png[Open workbench, 400]
++
+Your JupyterLab environment window opens.
++
+This file-browser window shows the files and folders that are saved inside your own personal space in {productname-short}.
+
+. Bring the content of this {deliverable} inside your JupyterLab environment:
+
+.. On the toolbar, click the *Git Clone* icon:
++
+image::setup/jupyter-git-icon.png[Git Clone icon, 200]
+
+.. Enter the following {deliverable} Git *https* URL:
++
+[.lines_space]
+[.console-input]
+[source,text]
+----
+https://github.com/cfchase/quantization-workshop.git
+----
++
+image::setup/jupyter-git-modal.png[Git Modal, 300]
+
+.. In the file browser, double-click the newly-created *quantization-workshop* folder.
++
+image::setup/jupyter-file-browser.png[Jupyter file browser, 400]

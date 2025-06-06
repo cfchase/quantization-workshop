@@ -2,17 +2,16 @@
 
 * xref:overview/overview.adoc[Overview]
 
-* xref:setup/setup.adoc[Setup]
 
-* Section 1
-** xref:section-1/section-1-1.adoc[Section 1.1]
-** xref:section-1/section-1-2.adoc[Section 1.2]
+* Quantization
+** xref:quantization/quantization-1.adoc[Quantization 1]
+** xref:quantization/quantization-2.adoc[Quantization 2]
 
-* Section 2
-** xref:section-2/section-2-1.adoc[Section 2.1]
-** xref:section-2/section-2-2.adoc[Section 2.2]
+* Exercise
+** xref:exercise/setup.adoc[Setup]
+** xref:exercise/quantization.adoc[Quantization]
+** xref:exercise/benchmarking.adoc[Benchmarking]
 
 * xref:conclusion/conclusion.adoc[Conclusion]
-
 
 

@@ -1,0 +1,11 @@
+[id='llm-compressor']
+= Quantizing Models with LLM Compressor
+
+
+.Procedure
+
+. Return to the JupyterLab environment
++
+Follow the directions in `1_quantization.ipynb` to quantize the model.
++
+image::setup/notebook-quantization.png[Notebook Quantization, 800]

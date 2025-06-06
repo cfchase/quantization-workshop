@@ -1,5 +1,5 @@
-name: antora-workshop
-title: Antora Workshop
+name: quantization-workshop
+title: Quantization Workshop
 version: master
 nav:
   - modules/ROOT/nav.adoc

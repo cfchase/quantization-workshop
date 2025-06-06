@@ -1,7 +1,7 @@
 {
-  "name": "antora-workshop",
-  "description": "Antora Workshop",
-  "homepage": "https://user.github.io/antora-workshop",
+  "name": "quantization-workshop",
+  "description": "Quantization Workshop",
+  "homepage": "https://cfchase.github.io/quantization-workshop",
   "dependencies": {
     "@antora/cli": "^3.1.4",
     "@antora/site-generator-default": "^3.1.4",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/you/antora-workshop.git"
+    "url": "git+https://github.com/cfchase/quantization-workshop.git"
   },
   "license": "Apache-2.0",
   "babel": {

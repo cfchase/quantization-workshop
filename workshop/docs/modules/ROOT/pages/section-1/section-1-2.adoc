@@ -1,6 +1,0 @@
-= Section 1.2
-:!sectids:
-
-[id='introduction']
-[.text-center.strong]
-== Section 1.2

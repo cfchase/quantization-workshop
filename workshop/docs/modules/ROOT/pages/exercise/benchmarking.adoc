@@ -1,0 +1,11 @@
+[id='benchmarking']
+= Benchmarking Quantized Models
+
+
+.Procedure
+
+. Return to the JupyterLab environment
++
+Follow the directions in `2_benchmark.ipynb` to benchmark the quantized model.
++
+image::setup/notebook-benchmark.png[Notebook Quantization, 800]

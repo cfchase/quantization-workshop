@@ -1,4 +1,4 @@
-# Antora Workshop Template
+# Quantization Workshop
 
 ### Running the workshop locally
 
