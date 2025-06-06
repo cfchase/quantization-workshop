@@ -1,0 +1,6 @@
+= Antora Workshop
+:!sectids:
+
+[id='introduction']
+[.text-center.strong]
+== Section 2.2

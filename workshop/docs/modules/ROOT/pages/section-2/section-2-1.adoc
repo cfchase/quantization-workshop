@@ -1,0 +1,8 @@
+= Section 2.1 d
+:!sectids:
+
+[id='introduction']
+[.text-center.strong]
+== Section 2.1
+
+

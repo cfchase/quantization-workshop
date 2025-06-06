@@ -1,0 +1,6 @@
+= Setup
+:!sectids:
+
+[id='introduction']
+[.text-center.strong]
+== Setup

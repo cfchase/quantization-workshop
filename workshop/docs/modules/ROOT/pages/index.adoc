@@ -1,0 +1,8 @@
+= Antora Workshop
+:!sectids:
+
+[id='introduction']
+[.text-center.strong]
+== Introduction
+
+Welcome. 

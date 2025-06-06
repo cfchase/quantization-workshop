@@ -1,0 +1,7 @@
+= Conclusion
+:!sectids:
+
+[id='introduction']
+[.text-center.strong]
+== Conclusion
+

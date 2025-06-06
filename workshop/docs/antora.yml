@@ -1,0 +1,7 @@
+name: antora-workshop
+title: Antora Workshop
+version: master
+nav:
+  - modules/ROOT/nav.adoc
+
+start_page: ROOT:index.adoc
