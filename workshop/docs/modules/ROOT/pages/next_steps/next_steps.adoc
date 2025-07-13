@@ -1,0 +1,28 @@
+= Next Steps
+:page-title: Next Steps
+:page-layout: workshop
+:page-role: content
+
+This section provides a quick reference to essential tools and resources used throughout the workshop — from model quantization to benchmarking and deployment.
+
+[cols="1,3", options="header"]
+|===
+| Question | Tool / Resource
+
+| *How to quantize?*
+| *LLM-Compressor*
+https://github.com/vllm-project/llm-compressor
+
+| *How to benchmark?*
+| *GuideLLM*
+https://github.com/vllm-project/guidellm
+
+| *Where to find high-quality quantized models?*
+| *Red Hat AI on Hugging Face*
+https://huggingface.co/RedHatAI
+
+| *How to deploy?*
+| *vLLM*
+https://github.com/vllm-project/vllm
+|===
+

@@ -1,0 +1,44 @@
+= 4. Hands-on with Quantization
+:page-title: Hands-on with Quantization
+:page-layout: workshop
+:page-role: content
+
+
+++++
+<iframe
+  width="835"
+  height="480"
+  src="https://www.youtube.com/embed/LK2-lrLvhTA?start=1469&end=2386&autoplay=0"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
+++++
+
+For more practical guidance and reference implementations using *LLM-Compressor*, we recommend exploring the following official resources:
+
+* 📄 *LLM-Compressor Examples Page*
+https://github.com/vllm-project/llm-compressor/tree/main/examples
+** This page contains curated examples showcasing different quantization setups, model configurations, and workflows using `LLM-Compressor`.
+
+* 🧠 *Red Hat AI Model Repository on Hugging Face*
+https://huggingface.co/RedHatAI
+This is our official repository of *quantized models*, all built using `LLM-Compressor`. Each model includes:
+
+** Open-sourced code for reproducing the quantization process
+** Documentation and metadata about the bit-widths used
+** Models regularly maintained and updated with new variants
+
+'''
+
+== ✅ Recommendation
+
+[Example]
+====
+If you are assigned to *quantize a model*, always start by checking the Red Hat AI repository:
+
+* If a quantized version of your target model already exists — you can use it directly.
+* If not, you can locate a *similar model* and *copy-paste the quantization code* as a baseline.
+
+This approach ensures you’re building on a *well-tested foundation* and significantly reduces the overhead of starting from scratch.
+====

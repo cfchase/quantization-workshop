@@ -1,0 +1,59 @@
+= Medium Model on a Single Low-Memory GPU
+:page-title: Motivation
+:page-layout: workshop
+:page-role: content
+
+*Scenario*:
+Deploying `granite-20b-code-instruct-8k` on a *single A10G (24GB)* GPU.
+
+=== Key Facts
+
+. *Model size*: 20B parameters
+. *Precision*: BF16 → 2 bytes/weight
+. *Memory requirement*:
++
+--
+`20B × 2 bytes = 40 GB`
+--
+. *Conclusion*:
++
+--
+`40 GB > 24 GB` → Model *doesn't fit* on the target GPU.
+
+`40 GB / 24 GB/GPU = 1.67 GPUs` → It requires *2 GPUs*, which is not viable in this case.
+--
+
+=== Proposed Solution #1: Quantization to INT8
+
+- *Quantization scheme*: INT8
+- *Precision (bit-width) reduction*: 2 bytes/weight (BF16) → 1 byte/weight (INT8)
+- *New memory requirements*:
++
+--
+`20B × 1 byte = 20 GB`
+--
+- *Free memory left for KV-cache*: `24 GB - 20 GB = 4 GB`
+- *Problem*:
++
+--
+`4 GB` is *not enough* for KV-cache in high-throughput or long-context scenarios.
+--
+
+=== Proposed Solution #2: Quantization to INT4
+
+- *Quantization scheme*: INT4
+- *Precision (bit-width) reduction*: 2 bytes/weight (BF16) → 0.5 byte/weight (INT4)
+- *New memory requirements*:
++
+--
+`20B × 0.5 byte = 10 GB`
+--
+- *Free memory left for KV-cache*: `24 GB - 10 GB = 14 GB`
+- *Result*: Plenty of headroom for *longer contexts, concurrent requests, and KV-cache*.
+
+=== ✅ Takeaway
+
+Even though *8-bit quantization* is sufficient to fit the model, it leaves *too little memory* for long-context, concurrent requests, and KV-cache.
+*4-bit quantization* solves this by freeing up *more memory*, enabling *realistic deployments* on smaller GPUs.
+
+'''

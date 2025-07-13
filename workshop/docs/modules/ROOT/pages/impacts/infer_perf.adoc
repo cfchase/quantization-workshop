@@ -1,0 +1,57 @@
+= 5.1 Inference Performance Under Quantization
+:page-title: Inference Performance Under Quantization
+:page-layout: workshop
+:page-role: content
+
+
+++++
+<iframe
+  width="835"
+  height="480"
+  src="https://www.youtube.com/embed/LK2-lrLvhTA?start=2396&end=2970&autoplay=0"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
+++++
+
+There are no *silver bullets* when it comes to performance optimization. It is a *multi-faceted problem* that requires:
+
+* Careful *benchmarking*
+* Detailed *analysis*
+* Awareness of *deployment constraints*
+* Realistic *workload simulations*
+
+As demonstrated in the previous video, *even with the same LLM and the same GPU*, performance can vary significantly based on the number of *concurrent requests*.
+
+'''
+
+== 🧪 Key Observations
+
+* *Low Request Rate → Underutilized GPU*
+** Best *latency* is typically achieved with *INT4 (W4A16)* quantization.
+** The bottleneck in this regime is *memory bandwidth*, and compressing weights reduces load time.
+
+* *High Request Rate → Fully Utilized GPU*
+** Best *latency* shifts to *weight-and-activation quantization (W8A8-INT or W8A8-FP)*.
+** In this *compute-bound* scenario, leveraging *lower-precision tensor cores* (with ~2× more FLOPS) becomes advantageous.
+
+'''
+
+== ✅ Takeaway
+
+Performance optimization is *context-dependent*. The right quantization strategy depends on:
+
+* *Hardware characteristics*
+* *Target application*
+* *Expected QPS (queries per second) patterns*
+
+[Example]
+====
+Always *benchmark under realistic conditions* before making deployment decisions.
+====
+
+[NOTE]
+====
+As of now, **GuideLLM** can be found under the official vLLM project repository: https://github.com/vllm-project/guidellm
+====

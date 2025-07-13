@@ -1,0 +1,56 @@
+= Large Model on a Multi-GPU Server
+:page-title: Motivation
+:page-layout: workshop
+:page-role: content
+
+*Scenario*:
+Deploying a `Meta-Llama-3.1-405B-Instruct` model on a server with *8× H100 (80GB)* GPUs.
+
+=== Key Facts
+
+. *Model size*: 405B parameters
+. *Precision*: BrainFloat16 (BF16) → *2 bytes/weight*
+. *Memory requirement*:
++
+--
+`405B × 2 bytes = 810 GB`
+--
+. *Available memory* on the target server:
++
+--
+`8 × 80 GB = 640 GB`
+--
+. *Conclusion*:
++
+--
+`810 GB > 640 GB` → Model *doesn't fit* on the target server.
+
+`810 GB / 80 GB/GPUs = 10.12 GPUs` → It requires *11 GPUs*, so an *additional server is required*.
+--
+
+=== Proposed Solution: Quantization
+
+- *Quantization scheme*: FP8
+- *Precision (bit-width) reduction*:
++
+--
+2 bytes/weight (BF16) → 1 byte/weight (FP8)
+--
+- *New memory requirements*:
++
+--
+`405B × 1 byte = 405 GB`
+--
+- *Required GPUs*: `405 GB / 80 GB/GPU = 5.06 GPU` → *6 GPUs*
+- *Result*: Model *fits* on a single 8×H100 server.
+
+=== ✅ Takeaway
+
+Quantizing to *FP8 reduces model size by 50%*, enabling deployment on *existing hardware* without needing a second server, thereby significantly *reducing infrastructure cost*.
+
+[NOTE]
+====
+For simplicity, KV-cache memory requirements were not considered in this example.
+====
+
+'''

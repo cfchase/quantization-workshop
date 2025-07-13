@@ -1,0 +1,33 @@
+= 2.3 Where Does Quantization Fit Inside an Inference Server?
+:page-title: Where Does Quantization Fit Inside an Inference Server?
+:page-layout: workshop
+:page-role: content
+
+
+++++
+<iframe
+  width="835"
+  height="480"
+  src="https://www.youtube.com/embed/LK2-lrLvhTA?start=632&end=829&autoplay=0"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
+++++
+
+'''
+
+A closer look at the memory hierarchy highlights two key areas to target for quantization-based acceleration:
+
+. *Loading* of linear layers
+. *Computation* with linear layers
+
+This distinction has led to the development of two main quantization schemes:
+
+. *Weight-only quantization* — focuses on accelerating the *loading* process
+. *Weight-and-activation quantization* — aims to speed up *computation*
+
+We’ll explore both of these approaches in more detail in the following section.
+
+
+'''

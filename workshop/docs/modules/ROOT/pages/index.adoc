@@ -1,11 +1,42 @@
-= Quantization Workshop
+= Introduction to Quantization
 :!sectids:
 
 [id='introduction']
 [.text-center.strong]
-== Introduction
+:page-title: Introduction to Quantization
+:page-aliases: intro-quantization
+:page-layout: workshop
+:page-role: content
 
-In this workshop, we will explore quantization, a technique for reducing the precision of model weights to improve inference speed and reduce memory usage.
+In this workshop, we will explore the *fundamentals of quantization* — a technique used to reduce the precision of model weights and activations. Quantization enables more efficient inference by:
 
-We will review an in depth explanation of quantization and then explore the impact of quantization on model performance.
+* Decreasing memory footprint of the model
+* Accelerating model execution on GPUs
 
+'''
+
+== 🎯 What You Will Learn
+
+By the end of this workshop, you will be able to:
+
+* Grasp the *core concepts of quantization* and why it matters for LLMs
+* Understand *where quantization is applied* within an LLM and how it fits into an inference server
+* Estimate the *memory savings* achieved through quantization
+* Understand the *most common quantization schemes* in practice
+* Select the *appropriate quantization format* based on your deployment scenario
+* Understand the *impact on latency and throughput*
+* Understand the *effects on model accuracy*
+* Use *LLM-Compressor* to quantize models for your own applications
+
+
+[NOTE]
+====
+This workshop combines short videos with text explanations. Each section includes a short video clip followed by a brief explanation.
+Each video clip is set to play only the part that's relevant to the topic, even though the thumbnail image always looks the same.
+
+If you prefer to watch the full video instead, you can find it at the following link:
+
+https://www.youtube.com/watch?v=LK2-lrLvhTA[Watch the full video]
+====
+
+'''

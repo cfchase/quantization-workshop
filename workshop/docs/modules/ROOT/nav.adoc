@@ -1,17 +1,20 @@
-* xref:index.adoc[Home]
+* xref:index.adoc[Overview]
 
-* xref:overview/overview.adoc[Overview]
+* Motivation
+** xref:motivation/usecase1.adoc[Use Case #1]
+** xref:motivation/usecase2.adoc[Use Case #2]
 
+* Quantization 101
+** xref:quantization101/what_is_quant.adoc[What is Quantization?]
+** xref:quantization101/where_inside_an_llm.adoc[Where Does Quantization Fit Inside an LLM?]
+** xref:quantization101/where_inside_a_server.adoc[Where Does Quantization Fit Inside an Inference Server?]
+** xref:quantization101/quant_formats.adoc[Quantization Formats]
 
-* Quantization
-** xref:quantization/quantization-1.adoc[Quantization 1]
-** xref:quantization/quantization-2.adoc[Quantization 2]
+* xref:choose_quant_formats/choose_quant_formats.adoc[Choosing the Right Quantization Format]
+* xref:hands_on_quant/hands_on_quant.adoc[Hands-on with Quantization]
 
-* Exercise
-** xref:exercise/setup.adoc[Setup]
-** xref:exercise/quantization.adoc[Quantization]
-** xref:exercise/benchmarking.adoc[Benchmarking]
+* Impacts of Quantization
+** xref:impacts/infer_perf.adoc[Inference Performance]
+** xref:impacts/accuracy.adoc[Model Accuracy]
 
-* xref:conclusion/conclusion.adoc[Conclusion]
-
-
+* xref:next_steps/next_steps.adoc[Next Steps]

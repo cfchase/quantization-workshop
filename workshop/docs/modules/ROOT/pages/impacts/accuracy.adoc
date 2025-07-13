@@ -1,0 +1,29 @@
+= 5.2 Model Accuracy Under Quantization
+:page-title: Model Accuracy Under Quantization
+:page-layout: workshop
+:page-role: content
+
+
+++++
+<iframe
+  width="835"
+  height="480"
+  src="https://www.youtube.com/embed/LK2-lrLvhTA?start=2975&end=3438&autoplay=0"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
+++++
+
+== ✅ Takeaway
+
+When properly configured and tuned, the primary quantization formats we focus on — *INT4*, *INT8*, and *FP8* — result in *minimal accuracy loss*.
+
+* *FP8* is typically *indistinguishable from BF16* in terms of model performance.
+* *INT8* performs similarly, although in rare cases involving *heavy activation outliers*, a small accuracy drop (1–2%) can occur.
+* *INT4* is the most challenging to get right, but as demonstrated in the previous video, *it can achieve competitive accuracy when tuned carefully*.
+
+If you're interested in a deeper technical analysis of this topic, we encourage you to read our paper:
+
+*“Give Me BF16 or Give Me Death? Accuracy-Performance Trade-Offs in LLM Quantization”*
+https://arxiv.org/pdf/2411.02355

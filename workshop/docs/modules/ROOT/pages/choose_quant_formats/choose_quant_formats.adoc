@@ -1,0 +1,92 @@
+= 3. Choosing the Right Quantization Format
+:page-title: Choosing the Right Quantization Format
+:page-layout: workshop
+:page-role: content
+
+
+++++
+<iframe
+  width="835"
+  height="480"
+  src="https://www.youtube.com/embed/LK2-lrLvhTA?start=1038&end=1448&autoplay=0"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
+++++
+
+Selecting the right quantization format is a nuanced decision and could easily fill an entire workshop on its own. However, for the scope of this session, we will simplify the topic by offering a set of *practical guidelines*. These should serve as a strong starting point for establishing baseline performance under typical deployment constraints.
+
+'''
+
+== Real-World Constraints: GPU-Poor vs. GPU-Rich
+
+In production scenarios, our choices are usually shaped by *external constraints* — primarily defined by the hardware that customers have available. Broadly, these environments fall into two categories:
+
+=== 1. GPU-Poor Deployments
+
+In GPU-limited settings, the most critical factor is *available GPU memory*. Here, the primary goal is to *fit the model* onto the target hardware, often at the expense of optimal throughput or latency.
+
+[NOTE]
+====
+*Example:*
+In _Use Case #2_ (referenced in the motivation section), we're tasked with deploying a *20B parameter model* onto a *single A10G GPU* with *24GB of memory*.
+
+The model’s weights alone require approximately *40GB*, not counting KV-cache memory or concurrent request overhead.
+
+The only viable strategy is to *quantize the model down to INT4* — the lowest bit-width available — while still preserving reasonable accuracy.
+====
+
+=== 2. GPU-Rich Deployments
+
+In environments where GPUs are *not a limiting resource*, the quantization strategy should align with the *nature of the application*.
+
+==== Latency-Driven Applications
+
+For use cases like chatbots or interactive tools that don’t receive a high volume of requests per second, the deployment often ends up *memory-bandwidth-bound*.
+
+In these scenarios:
+
+* Model inputs are typically *small*
+* *Loading weights* dominates runtime
+* *Tensor cores are underutilized*
+
+👉 The best approach here is *weight-only quantization* (e.g., INT4), since:
+
+* We don’t benefit from quantizing activations (compute is free, data movement is the bottleneck)
+* Lowering activation precision may harm accuracy without improving throughput
+
+==== Throughput-Driven Applications
+
+When the model serves *many concurrent users or high QPS (queries per second)*, we transition to a *compute-bound* regime:
+
+* Inputs are *large enough* to saturate tensor cores
+* The primary bottleneck becomes *computation*, not memory
+
+👉 In this case, *weight-and-activation quantization* is the optimal choice. Options include:
+
+* *INT8 (W8A8-INT)*
+* *FP8 (W8A8-FP)*
+
+If the available hardware includes *H100*, *L40S*, or *Blackwell-class GPUs (e.g., B200)*, then *FP8 is preferred*:
+
+* FP8 and INT8 have the *same FLOPS throughput*
+* *FP8 offers better accuracy*, thanks to its *larger dynamic range*
+
+We'll examine empirical results to support this claim in the following sections.
+
+If the hardware is *A100*, *A10*, or older, the only available choice is *INT8*, as FP8 support is not present.
+
+'''
+
+== ✅ Summary
+
+* *GPU-poor deployments* → Focus on *fitting the model* → Use *INT4 (W4A16)*
+* *Latency-sensitive GPU-rich deployments* → Optimize *loading speed* → Use *INT4*
+* *Throughput-sensitive GPU-rich deployments* → Optimize *computation* → Use *W8A8-INT* or *W8A8-FP*, depending on hardware support
+* *Prefer FP8 over INT8* when available, due to better accuracy at equal compute capacity
+
+[Example]
+====
+Always *match the quantization strategy to the hardware and application* — not all formats are equally effective in all environments.
+====

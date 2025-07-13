@@ -1,0 +1,109 @@
+= 2.4 Quantization Formats
+:page-title: Quantization Formats
+:page-layout: workshop
+:page-role: content
+
+There are two main formats for quantizing large language models (LLMs):
+
+. *Weight-only quantization*
+. *Weight-and-activation quantization*
+
+These formats target different performance bottlenecks and hardware capabilities, and selecting between them depends on your deployment goals and constraints.
+
+'''
+
+== ⚙️ 1. Weight-Only Quantization
+
+Weight-only quantization reduces the number of bits used to represent the **weights** of the model.
+
+[NOTE]
+====
+*Example:*
+We typically quantize weights from *16-bit to 4-bit weights* which achieves a *16 / 4 = 4x reduction* in memory footprint and reduces the amount of data that must be loaded into tensor cores during inference.
+====
+
+This quantization scheme accelerates the *model loading pipeline*, especially in the memory bandwidth limited scenarios.
+
+In practice, the *target bit-width* depends on:
+
+* Available *inference kernels* in `vLLM`
+* Acceptable *impact on accuracy*
+
+Currently, `vLLM` provides *efficient kernels* for *4-bit and 8-bit* weights. To support this, we’ve developed dedicated *quantization algorithms* in `LLM-Compressor` that achieve this compression level *with negligible accuracy loss*.
+We will dive deeper into the impacts of quantization on accuracy in the later sections of this workshop.
+
+'''
+
+== 🔄 2. Weight-and-Activation Quantization
+
+Weight-and-activation quantization reduces the bit-width for **both**, *weights* and *activations*.
+
+Since our quantization efforts focus primarily on *linear layers*, this implies that their *activations* are also quantized.
+The goal is to perform *matrix-matrix multiplications* entirely in low-precision formats, which allows us to leverage *specialized lower-precision tensor cores*.
+
+[NOTE]
+====
+As demonstrated in the previous video, using lower-precision cores (e.g., INT8 or FP8) offers up to *2× more FLOPS*, accelerating the *computation stage* of inference.
+====
+
+Modern GPUs come with:
+
+* *INT8* tensor cores (Ampere and older architectures)
+* *FP8* tensor cores (Hopper, Ada Lovelace, and newer architectures)
+
+To support efficient inference with these dedicated tensor cores, we’ve built:
+
+* *Inference kernels* in `vLLM`
+* *Compression techniques* in `LLM-Compressor`
+
+...specifically targeting *INT8* and *FP8* precision formats.
+
+'''
+
+== 🖥️ Hardware Support Matrix
+
+The following table summarizes the support for INT8 and FP8 tensor cores across different GPU models:
+
+[cols="1,1,1", options="header"]
+|===
+| GPU Model | INT8 Support | FP8 Support
+
+| H100 | ✅ | ✅
+| L40S | ✅ | ✅
+| A100, A10, etc | ✅ | ❌
+| V100 | ✅ | ❌
+|===
+
+[NOTE]
+====
+Always consider the *target deployment hardware* when choosing a quantization format. Not all GPUs support the same precision levels.
+====
+
+'''
+
+== ✅ Takeaway
+
+Our focus is on two key quantization formats:
+
+* *Weight-Only Quantization*
+** Target: *4-bit weights*
+** Notation: `INT4` or `W4A16`
+→ `W4`: Weights in 4 bits
+→ `A16`: Activations remain in 16 bits (not quantized)
+
+* *Weight-and-Activation Quantization*
+** Target: *8-bit weights and activations*
+** Notation:
+*** `INT8` → `W8A8-INT` (8-bit weights, 8-bit activations, integer format)
+*** `FP8` → `W8A8-FP` (8-bit weights, 8-bit activations, floating point format)
+
+'''
+
+== ⚠️ On Emerging Hardware: The Blackwell Architecture
+
+The latest *Blackwell GPUs* (e.g., *B200*) feature *4-bit floating point tensor cores*, effectively *doubling the FLOPS* compared to 8-bit tensor cores.
+
+[NOTE]
+====
+However, since these devices are still *new and not widely deployed*, we will *exclude them from the scope* of this workshop.
+====

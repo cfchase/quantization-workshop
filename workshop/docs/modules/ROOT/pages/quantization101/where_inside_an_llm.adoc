@@ -1,0 +1,109 @@
+= 2.2 Where Does Quantization Fit Inside an LLM?
+:page-title: Where Does Quantization Fit Inside an LLM?
+:page-layout: workshop
+:page-role: content
+
+
+++++
+<iframe
+  width="835"
+  height="480"
+  src="https://www.youtube.com/embed/LK2-lrLvhTA?start=426&end=632&autoplay=0"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
+++++
+
+'''
+
+In the previous video, we saw that the *majority of a model’s forward pass runtime is spent on linear operators*. Beyond runtime performance, another critical aspect is the model's *memory footprint*, which directly impacts deployability and efficiency.
+
+To better understand this, we’ll look at the memory usage of two widely used models: *LlaMA-3.1-8B* and *LlaMA-3.1-70B*.
+
+'''
+
+== 📊 LlaMA-3.1-8B: Parameter Breakdown by Layer
+
+In the table below, we break down the structure of the Llama model into individual components/operators. Each self-attention layer is composed of the four linear operators: `q_proj`, `k_proj`, `v_proj`, and `o_proj`.
+Whereas the MLP layer is composed of three linear operators: `gate_proj`, `up_proj`, and `down_proj`.
+
+[NOTE]
+====
+`N` in the table below refers to a single N-th transformer layer. There are 32 such layers in total, N ∈ {0, 1, 2, ..., 31}, all identical in structure.
+====
+
+[cols="2,>1", options="header"]
+|===
+| Layer Component | Parameters
+
+| *Total* | 8,030,261,248
+| `model.embed_tokens` | 525,336,576
+| `model.layers` | 6,979,584,000
+| `model.layers.N` | 218,112,000
+| ├─ `self_attn` | 41,943,040
+| │   ├─ `q_proj` | 16,777,216
+| │   ├─ `k_proj` | 4,194,304
+| │   ├─ `v_proj` | 4,194,304
+| │   └─ `o_proj` | 16,777,216
+| ├─ `mlp` | 176,160,768
+| │   ├─ `gate_proj` | 58,720,256
+| │   ├─ `up_proj` | 58,720,256
+| │   └─ `down_proj` | 58,720,256
+| ├─ `input_layernorm` | 4,096
+| └─ `post_attention_layernorm` | 4,096
+| `model.norm` | 4,096
+| `lm_head` | 525,336,576
+|===
+
+'''
+
+== 🧠 Llama-3.1-8B: Component-Level Breakdown
+
+If we zoom-out and group the individual operators into categories, we get the following breakdown:
+
+[cols="2,>1,>1", options="header"]
+|===
+| Category | Parameters | % of Total
+
+| *Total* | 8,030,261,248 | 100.00%
+| Linear layers | 6,979,321,856 | 86.91%
+| Embedding layer | 525,336,576 | 6.54%
+| Normalization layers | 266,240 | 0.33%
+| LM Head | 525,336,576 | 6.54%
+|===
+
+We can see that the linear layers account for the majority of memory usage (**86.91%**). Combined with their significant runtime cost, as discussed in the previous video, this makes them an ideal target for quantization.
+
+'''
+
+== 📊 LlaMA-3.1-70B: Component-Level Breakdown
+
+If we repeat the same analysis for Llama-3.1-70B, we get the following memory footprint breakdown:
+
+[cols="2,>1,>1", options="header"]
+|===
+| Category | Total Parameters | Fraction of Total
+
+| *Total* | 70,553,706,496 | 100.00%
+| Linear layers | 68,451,041,280 | 97.02%
+| Embedding layer | 1,050,673,152 | 1.49%
+| Normalization layers | 1,318,912 | 0.00%
+| LM Head | 1,050,673,152 | 1.49%
+|===
+
+As we can see, the linear layers take up **97.02%** of the memory in the 70B model, which is even more than in the 8B model.
+
+'''
+
+== ✅ Takeaway
+
+* *Linear layers are the dominant contributors to both runtime and memory footprint.*
+* For the 8B model, they account for *86.91%* of total parameters.
+* For the 70B model, they make up an even more significant *97.02%*.
+* As a result, linear layers are the *primary target for optimization techniques*, such as quantization, to reduce inference cost and improve deployability.
+
+This insight will guide our decisions on which components to focus on in the upcoming optimization steps.
+
+
+'''
