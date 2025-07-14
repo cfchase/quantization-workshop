@@ -18,7 +18,6 @@ Weight-only quantization reduces the number of bits used to represent the **weig
 
 [NOTE]
 ====
-*Example:*
 We typically quantize weights from *16-bit to 4-bit weights* which achieves a *16 / 4 = 4x reduction* in memory footprint and reduces the amount of data that must be loaded into tensor cores during inference.
 ====
 

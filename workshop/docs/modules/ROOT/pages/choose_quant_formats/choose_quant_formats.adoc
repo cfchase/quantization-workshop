@@ -29,7 +29,6 @@ In GPU-limited settings, the most critical factor is *available GPU memory*. Her
 
 [NOTE]
 ====
-*Example:*
 In _Use Case #2_ (referenced in the motivation section), we're tasked with deploying a *20B parameter model* onto a *single A10G GPU* with *24GB of memory*.
 
 The model’s weights alone require approximately *40GB*, not counting KV-cache memory or concurrent request overhead.
@@ -43,7 +42,7 @@ In environments where GPUs are *not a limiting resource*, the quantization strat
 
 ==== Latency-Driven Applications
 
-For use cases like chatbots or interactive tools that don’t receive a high volume of requests per second, the deployment often ends up *memory-bandwidth-bound*.
+For use cases like local chatbots or interactive tools that don’t receive a high volume of requests per second, the deployment often ends up *memory-bandwidth-bound*.
 
 In these scenarios:
 
@@ -54,14 +53,14 @@ In these scenarios:
 👉 The best approach here is *weight-only quantization* (e.g., INT4), since:
 
 * We don’t benefit from quantizing activations (compute is free, data movement is the bottleneck)
-* Lowering activation precision may harm accuracy without improving throughput
+* Reducing activation precision may harm accuracy without any latency/throughput benefits
 
 ==== Throughput-Driven Applications
 
 When the model serves *many concurrent users or high QPS (queries per second)*, we transition to a *compute-bound* regime:
 
 * Inputs are *large enough* to saturate tensor cores
-* The primary bottleneck becomes *computation*, not memory
+* The primary bottleneck becomes *computation*, not memory and data movement
 
 👉 In this case, *weight-and-activation quantization* is the optimal choice. Options include:
 

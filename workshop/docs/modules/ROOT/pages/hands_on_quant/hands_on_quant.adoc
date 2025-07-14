@@ -25,7 +25,7 @@ https://github.com/vllm-project/llm-compressor/tree/main/examples
 https://huggingface.co/RedHatAI
 This is our official repository of *quantized models*, all built using `LLM-Compressor`. Each model includes:
 
-** Open-sourced code for reproducing the quantization process
+** Open-sourced code for reproducing the quantization and evaluation process
 ** Documentation and metadata about the bit-widths used
 ** Models regularly maintained and updated with new variants
 
