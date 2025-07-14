@@ -1,7 +1,7 @@
 {
   "name": "quantization-workshop",
   "description": "Quantization Workshop",
-  "homepage": "https://cfchase.github.io/quantization-workshop",
+  "homepage": "https://eldarkurtic.github.io/quantization-workshop",
   "dependencies": {
     "@antora/cli": "^3.1.4",
     "@antora/site-generator-default": "^3.1.4",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cfchase/quantization-workshop.git"
+    "url": "git+https://github.com/eldarkurtic/quantization-workshop.git"
   },
   "license": "Apache-2.0",
   "babel": {

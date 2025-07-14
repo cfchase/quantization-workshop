@@ -95,7 +95,7 @@ image::setup/jupyter-git-icon.png[Git Clone icon, 200]
 [.console-input]
 [source,text]
 ----
-https://github.com/cfchase/quantization-workshop.git
+https://github.com/eldarkurtic/quantization-workshop.git
 ----
 +
 image::setup/jupyter-git-modal.png[Git Modal, 300]
