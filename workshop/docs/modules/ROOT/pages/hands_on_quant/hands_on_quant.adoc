@@ -1,5 +1,5 @@
-= 4. Hands-on with Quantization
-:page-title: Hands-on with Quantization
+= Intro to LLM-Compressor
+:page-title: Intro to LLM-Compressor
 :page-layout: workshop
 :page-role: content
 

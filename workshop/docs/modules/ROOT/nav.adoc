@@ -11,7 +11,9 @@
 ** xref:quantization101/quant_formats.adoc[Quantization Formats]
 
 * xref:choose_quant_formats/choose_quant_formats.adoc[Choosing the Right Quantization Format]
-* xref:hands_on_quant/hands_on_quant.adoc[Hands-on with Quantization]
+* Hands-on With Quantization
+** xref:hands_on_quant/hands_on_quant.adoc[Intro to LLM-Compressor]
+** xref:hands_on_quant/quant_a_model.adoc[Quantize and Evaluate a Model]
 
 * Impacts of Quantization
 ** xref:impacts/infer_perf.adoc[Inference Performance]

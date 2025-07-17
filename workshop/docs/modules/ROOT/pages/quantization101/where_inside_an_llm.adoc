@@ -28,11 +28,6 @@ To better understand this, we’ll look at the memory usage of two widely used m
 In the table below, we break down the structure of the Llama model into individual components/operators. Each self-attention layer is composed of the four linear operators: `q_proj`, `k_proj`, `v_proj`, and `o_proj`.
 Whereas the MLP layer is composed of three linear operators: `gate_proj`, `up_proj`, and `down_proj`.
 
-[NOTE]
-====
-`N` in the table below refers to a single N-th transformer layer. There are 32 such layers in total, N ∈ {0, 1, 2, ..., 31}, all identical in structure.
-====
-
 [cols="2,>1", options="header"]
 |===
 | Layer Component | Parameters
@@ -40,7 +35,7 @@ Whereas the MLP layer is composed of three linear operators: `gate_proj`, `up_pr
 | *Total* | 8,030,261,248
 | `model.embed_tokens` | 525,336,576
 | `model.layers` | 6,979,584,000
-| `model.layers.N` | 218,112,000
+| `model.layers.{0, 1, 2, ..., 31}` | 218,112,000
 | ├─ `self_attn` | 41,943,040
 | │   ├─ `q_proj` | 16,777,216
 | │   ├─ `k_proj` | 4,194,304
@@ -55,6 +50,12 @@ Whereas the MLP layer is composed of three linear operators: `gate_proj`, `up_pr
 | `model.norm` | 4,096
 | `lm_head` | 525,336,576
 |===
+
+[NOTE]
+====
+If you would like to dive deeper into the architecture of Transformer models, please refer to the first chapter _1. Transformer Models_ of this beginner-friendly course from Hugging Face: https://huggingface.co/learn/llm-course/en/chapter1/1?fw=pt.
+====
+
 
 '''
 

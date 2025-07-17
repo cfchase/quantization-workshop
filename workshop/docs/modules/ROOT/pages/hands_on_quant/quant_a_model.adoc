@@ -1,0 +1,15 @@
+= Quantize and Evaluate a Model
+:page-title: Quantize and Evaluate a Model
+:page-layout: workshop
+:page-role: content
+
+
+For those of you interested in experimenting with the quantization and evaluation process, we recommend exploring the following resources:
+
+. *Blog Post*: _Optimize LLMs with LLM-Compressor on OpenShift AI_.
+Learn how to integrate LLM-Compressor into Red Hat OpenShift AI, complete with real-world use cases and implementation steps.
+https://developers.redhat.com/articles/2025/05/20/optimize-llms-llm-compressor-openshift-ai#
+
+. *Code*: _Jupyter Notebook and Data Science Pipeline Examples_.
+Hands-on examples showcasing quantization workflows using Jupyter notebooks and Data Science Pipelines.
+https://github.com/red-hat-data-services/red-hat-ai-examples/tree/main/examples/llmcompressor
